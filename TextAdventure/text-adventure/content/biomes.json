@@ -1,0 +1,17 @@
+{
+    "biomes": [
+        {
+            "name":"village",
+            "enemies":[],
+            "npcs":["🧝🏼"],
+            "locations":["The Town Square", "The Inn", "The Shop"]
+        },
+        {
+            "name":"fields",
+            "enemies":["🐍","🐗","🦅","🐺"],
+            "npcs":["🧝🏼"],
+            "locations":["The fields", "The meadow"]
+        }
+    ]
+}
+
