@@ -1,9 +1,9 @@
 {
   "locations": [
-    { "name": "The Town Square", "description": "desc town square" },
-    { "name": "The Inn", "description": "desc the inn" },
-     { "name": "The Shop", "description": "desc the shop" },
-    { "name": "The fields", "description": "desc fields" },
-    { "name": "The meadow", "description": "desc meadow" }
+      { "name": "The Town Square", "description": "desc town square", "text": "text town square" },
+    { "name": "The Inn", "description": "desc the inn", "text": "text inn" },
+     { "name": "The Shop", "description": "desc the shop", "text": "text shop" },
+    { "name": "The fields", "description": "desc fields", "text": "text fields" },
+    { "name": "The meadow", "description": "desc meadow", "text": "text meadow" }
   ]
 }

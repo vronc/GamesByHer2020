@@ -19,8 +19,9 @@ struct Location {
     
     std::string id;
     std::string description;
+    std::string text;
     std::vector<std::shared_ptr<Location>> choices;
-    std::vector<std::shared_ptr<Entity>> enitites;
+    std::vector<std::shared_ptr<Entity>> entities;
 };
 
 class GameData {
@@ -40,7 +41,8 @@ class GameData {
         void printAvailableCharacters();
         std::shared_ptr<Location> startLocation;
         node* biomeRootNode;
-    void generateLocationGraph(node* biomeRoot, std::shared_ptr<Location> startLocation);
+        void generateLocationGraph(node* biomeRoot, std::shared_ptr<Location> startLocation);
+        void assignRandomEntities(std::vector<std::shared_ptr<Entity>> &entities, std::vector<std::string> biomeEnemies, std::vector<std::string> biomeNpcs);
         
     private:
         void createLocations();

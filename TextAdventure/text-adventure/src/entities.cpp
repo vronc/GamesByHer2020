@@ -25,7 +25,7 @@ void Entity::takeDamage(int dmg) {
     health -= dmg;
 }
 
-Enemy::Enemy(const std::string enemyId, std::vector<nlohmann::json> enemyAttacks)
+Enemy::Enemy(const std::string enemyId, std::vector<Attack> enemyAttacks)
 : Entity (enemyId) {
     attacks = enemyAttacks;
 };
@@ -35,9 +35,17 @@ void Enemy::interact() {
 }
 
 int Enemy::getNextAttackDmg() {
-    nlohmann::json attack = attacks[getRandomPosInt(0, attacks.size()-1)];
-    std::string avgDmg = attack["avg_dmg"];
-    int dmg = std::stoi(avgDmg)-3+getRandomPosInt(0,6);
-    std::cout << id << " used " << attack["name"] << "inflicting " << dmg << " damage points\n\n";
+    Attack attack = attacks[getRandomPosInt(0, attacks.size()-1)];
+    int dmg = attack.avgDmg-3+getRandomPosInt(0,6);
+    std::cout << id << " used " << attack.name << "inflicting " << dmg << " damage points\n\n";
     return dmg;
+}
+
+Npc::Npc(const std::string npcId, std::vector<std::string> npcDialogues)
+: Entity (npcId) {
+    dialogues = npcDialogues;
+};
+
+void Npc::interact() {
+    std::cout << this->dialogues[0];
 }

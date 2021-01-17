@@ -14,9 +14,13 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include "../json/single_include/nlohmann/json.hpp"
 
 #endif /* entities_hpp */
+
+struct Attack {
+    std::string name;
+    int avgDmg;
+};
 
 class Entity {
 public:
@@ -33,16 +37,18 @@ private:
 
 class Enemy : public Entity {
 public:
-    Enemy(const std::string id, std::vector<nlohmann::json> attacks);
+    Enemy(const std::string id, std::vector<Attack> attacks);
     virtual void interact();
     
-    std::vector<nlohmann::json> attacks;
+    std::vector<Attack> attacks;
     
     int getNextAttackDmg();
 };
 
 class Npc : public Entity {
 public:
-    Npc(const std::string id);
+    Npc(const std::string id, std::vector<std::string> dialogues);
     virtual void interact();
+    
+    std::vector<std::string> dialogues;
 };

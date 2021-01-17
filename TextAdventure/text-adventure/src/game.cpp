@@ -31,6 +31,20 @@ void Game::handleInventoryInput() {
     std::cout << "\nYou used your " << item.itemName << "\n\n";
     item.amount--;
 }
+void Game::handleEntityInteraction() {
+    std::string choice = "";
+    while (true) {
+        std::cin >> choice;
+        if (choice == "e" || choice == "E") { return; }
+        
+        else if (isPositiveIntInput(choice) || std::stoi(choice) > player.currentLocation->entities.size()) {
+            std::cout << "\nYour choice isn't valid, try again!\n";
+        } else {
+            break;
+        }
+    }
+    player.currentLocation->entities[std::stoi(choice)-1]->interact();
+}
 
 void Game::run() {
     player.addItem(0, 1);
@@ -55,7 +69,8 @@ void Game::run() {
             std::cout << "You have fallen into an unexpected void...🕳";
             break;
         }
-        std::cout << player.currentLocation->description;
+        //std::cout << "~" << player.currentLocation->id << "~\n\n";
+        std::cout << player.currentLocation->text;
         
         if (player.currentLocation->choices.size()==0){
             std::cout << "\ngame over\n";
@@ -77,6 +92,9 @@ void Game::run() {
                 handleInventoryInput();
                 break;
             }
+            else if (choice == "t" || choice == "T") {
+                handleEntityInteraction();
+            }
             else if (isPositiveIntInput(choice) || std::stoi(choice) > player.currentLocation->choices.size()) {
                 std::cout << "\nYour choice isn't valid, try again!\n";
             } else {
@@ -89,6 +107,7 @@ void Game::run() {
 }
 
 void Game::enterCombatMode(Enemy* enemy) {
+    std::cout << enemy->id << " attacks!\n";
     while (!enemy->isDead()) {
         enemy->takeDamage(player.attack());
         player.takeDamage(enemy->getNextAttackDmg());

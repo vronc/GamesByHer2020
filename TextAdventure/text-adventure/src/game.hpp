@@ -25,4 +25,5 @@ class Game {
 private:
     bool isRunning = true;
     void handleInventoryInput();
+    void handleEntityInteraction();
 };

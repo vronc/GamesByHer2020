@@ -11,6 +11,31 @@
 #include <fstream>
 #include <random>
 
+void GameData::assignRandomEntities(std::vector<std::shared_ptr<Entity>> &entities, std::vector<std::string> biomeEnemies, std::vector<std::string> biomeNpcs) {
+    if (biomeEnemies.size() > 0) {
+        std::vector<std::string> enemies=getRandomSelection(biomeEnemies, getRandomPosInt(1, biomeEnemies.size()));
+        for (std::string enemyId : enemies) {
+            std::vector<Attack> attacks;
+            Enemy enemy(enemyId, attacks);
+            Attack attack;
+            for (nlohmann::json a : availableEnemies[enemyId]["attacks"]){
+                attack.name = a["name"];
+                attack.avgDmg = a["avg_dmg"];
+                enemy.attacks.push_back(attack);
+            }
+            entities.push_back(std::make_shared<Enemy>(enemy));
+        }
+    }
+    
+    if (biomeNpcs.size() > 0) {
+        std::vector<std::string> npcs=getRandomSelection(biomeNpcs, getRandomPosInt(1, biomeNpcs.size()));
+        for (std::string npcId : npcs) {
+            Npc npc(npcId, availableNpcs[npcId]["dialogues"]);
+            entities.push_back(std::make_shared<Npc>(npc));
+        }
+    }
+}
+
 Location::Location(std::string inId, std::string inDescription) {
     id = inId;
     description = inDescription;
@@ -39,6 +64,7 @@ void GameData::generateLocationGraph(node* biomeNode, std::shared_ptr<Location> 
     
     for (std::string neighbour : neighboursWithinBiome) {
         currentLoc->choices.push_back(getLocationById(neighbour));
+        assignRandomEntities(currentLoc->entities, biomeNode->data["enemies"], biomeNode->data["npcs"]);
     }
     
     if (biomeNode->next == nullptr)
@@ -58,7 +84,6 @@ std::shared_ptr<Location> GameData::getStartLocation() {
 }
 
 std::shared_ptr<Location> GameData::getLocationById(const std::string id) {
-    
     return availableLocations[id];
 }
 
@@ -77,11 +102,13 @@ int GameData::loadLocations(const std::string& path) {
     for (int i=0 ; i<locationsJson["locations"].size()-1 ; i++) {
         workingLocation.id = locationsJson["locations"][i]["name"];
         workingLocation.description = locationsJson["locations"][i]["description"];
+        workingLocation.text = locationsJson["locations"][i]["text"];
         
         availableLocations.insert_or_assign(workingLocation.id, std::make_shared<Location>(workingLocation));
         
         workingLocation.id = "";
         workingLocation.description = "";
+        workingLocation.text = "";
         locationsAdded++;
     }
 

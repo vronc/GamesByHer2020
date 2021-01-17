@@ -45,7 +45,7 @@ void Player::printInventory() {
 
 int Player::attack() {
     int dmg = getRandomPosInt(3, 10);
-    std::cout << "You attacked, inflicting " << dmg << " damage points";
+    std::cout << "\nYou attacked, inflicting " << dmg << " damage points\n";
     return dmg;
 }
 
