@@ -14,7 +14,7 @@ extern Game game;
 
 Entity::Entity(const std::string entityId) {
     id=entityId;
-    health=100;
+    health=20;
 };
 
 bool Entity::isDead() {
@@ -47,5 +47,5 @@ Npc::Npc(const std::string npcId, std::vector<std::string> npcDialogues)
 };
 
 void Npc::interact() {
-    std::cout << this->dialogues[0];
+    std::cout << this->id << ": " << this->dialogues[0];
 }

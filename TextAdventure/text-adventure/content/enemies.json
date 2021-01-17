@@ -3,11 +3,11 @@
     "attacks": [
       {
         "name": "slash",
-        "avg_dmg": "5"
+        "avg_dmg": 5
       },
       {
         "name": "trident poke",
-        "avg_dmg": "7"
+        "avg_dmg": 7
       }
     ]
   },
@@ -15,11 +15,11 @@
     "attacks": [
       {
         "name": "bad breath",
-        "avg_dmg": "2"
+        "avg_dmg": 2
       },
       {
         "name": "bite",
-        "avg_dmg": "8"
+        "avg_dmg": 8
       }
     ]
   },
@@ -27,11 +27,11 @@
     "attacks": [
       {
         "name": "bad breath",
-        "avg_dmg": "2"
+        "avg_dmg": 2
       },
       {
         "name": "bite",
-        "avg_dmg": "8"
+        "avg_dmg": 8
       }
     ]
   },
@@ -39,11 +39,11 @@
     "attacks": [
       {
         "name": "tail whip",
-        "avg_dmg": "7"
+        "avg_dmg": 7
       },
       {
         "name": "fire breath",
-        "avg_dmg": "9"
+        "avg_dmg": 9
       }
     ]
   },
@@ -51,11 +51,11 @@
     "attacks": [
       {
         "name": "bite",
-        "avg_dmg": "2"
+        "avg_dmg": 2
       },
       {
         "name": "poisonous bite",
-        "avg_dmg": "4"
+        "avg_dmg": 4
       }
     ]
   },
@@ -63,11 +63,11 @@
     "attacks": [
       {
         "name": "snowball",
-        "avg_dmg": "2"
+        "avg_dmg": 2
       },
       {
         "name": "freezing bolt",
-        "avg_dmg": "8"
+        "avg_dmg": 8
       }
     ]
   },
@@ -75,11 +75,11 @@
     "attacks": [
       {
         "name": "charge",
-        "avg_dmg": "2"
+        "avg_dmg": 2
       },
       {
         "name": "tusk stab",
-        "avg_dmg": "3"
+        "avg_dmg": 3
       }
     ]
   },
@@ -87,11 +87,11 @@
     "attacks": [
       {
         "name": "swoop",
-        "avg_dmg": "2"
+        "avg_dmg": 2
       },
       {
         "name": "hawkish descendance",
-        "avg_dmg": "4"
+        "avg_dmg": 4
       }
     ]
   },
@@ -99,11 +99,11 @@
     "attacks": [
       {
         "name": "bite",
-        "avg_dmg": "4"
+        "avg_dmg": 4
       },
       {
         "name": "earsplitting howl",
-        "avg_dmg": "1"
+        "avg_dmg": 1
       }
     ]
   },
@@ -111,11 +111,11 @@
     "attacks": [
       {
         "name": "bite and roll",
-        "avg_dmg": "5"
+        "avg_dmg": 5
       },
       {
         "name": "tail whip",
-        "avg_dmg": "2"
+        "avg_dmg": 2
       }
     ]
   },
@@ -123,11 +123,11 @@
     "attacks": [
       {
         "name": "pinch",
-        "avg_dmg": "5"
+        "avg_dmg": 5
       },
       {
         "name": "posionous sting",
-        "avg_dmg": "10"
+        "avg_dmg": 10
       }
     ]
   },
@@ -135,11 +135,11 @@
     "attacks": [
       {
         "name": "swoop attack",
-        "avg_dmg": "2"
+        "avg_dmg": 2
       },
       {
         "name": "sonic boom",
-        "avg_dmg": "6"
+        "avg_dmg": 6
       }
     ]
   },
@@ -147,11 +147,11 @@
     "attacks": [
       {
         "name": "neck chomp",
-        "avg_dmg": "8"
+        "avg_dmg": 8
       },
       {
         "name": "claw",
-        "avg_dmg": "5"
+        "avg_dmg": 5
       }
     ]
   },
@@ -159,11 +159,11 @@
     "attacks": [
       {
         "name": "earthquake",
-        "avg_dmg": "10"
+        "avg_dmg": 10
       },
       {
         "name": "rock crush",
-        "avg_dmg": "12"
+        "avg_dmg": 12
       }
     ]
   },
@@ -171,11 +171,11 @@
     "attacks": [
       {
         "name": "aggressive hug attack",
-        "avg_dmg": "2"
+        "avg_dmg": 2
       },
       {
         "name": "paw punch",
-        "avg_dmg": "6"
+        "avg_dmg": 6
       }
     ]
   },
@@ -183,23 +183,23 @@
     "attacks": [
       {
         "name": "bite",
-        "avg_dmg": "5"
+        "avg_dmg": 5
       },
       {
         "name": "hypnotic stare",
-        "avg_dmg": "3"
+        "avg_dmg": 3
       },
       {
         "name": "suck blood",
-        "avg_dmg": "10"
+        "avg_dmg": 10
       },
       {
         "name": "swoop attack",
-        "avg_dmg": "2"
+        "avg_dmg": 2
       },
       {
         "name": "sonic boom",
-        "avg_dmg": "6"
+        "avg_dmg": 6
       }
     ]
   }

@@ -38,9 +38,11 @@ void Player::removeItem(const int id, int amount) {
 }
 
 void Player::printInventory() {
+    std::cout << "\nYour inventory🎒:\n\n";
     for (int i = 0; i < inventory.size(); ++i) {
-        std::cout << "\nYour inventory🎒:\n\n [" << i+1 << "]   " << inventory[i].amount << "   " << inventory[i].itemName << "\n\n [e]    Exit\n";
+        std::cout << " [" << i+1 << "]   " << inventory[i].amount << "   " << inventory[i].itemName << "\n";
     }
+    std::cout << "\n\n [e]    Exit\n";
 }
 
 int Player::attack() {

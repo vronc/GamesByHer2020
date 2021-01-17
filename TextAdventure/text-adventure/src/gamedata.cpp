@@ -18,9 +18,11 @@ void GameData::assignRandomEntities(std::vector<std::shared_ptr<Entity>> &entiti
             std::vector<Attack> attacks;
             Enemy enemy(enemyId, attacks);
             Attack attack;
-            for (nlohmann::json a : availableEnemies[enemyId]["attacks"]){
-                attack.name = a["name"];
-                attack.avgDmg = a["avg_dmg"];
+            attack.avgDmg=0;
+            for (nlohmann::json attackData : availableEnemies[enemyId]["attacks"]){
+                attack.name = attackData["name"];
+                std::cout << attackData["avg_dmg"];
+                attack.avgDmg = attackData.at("avg_dmg").get<int>();
                 enemy.attacks.push_back(attack);
             }
             entities.push_back(std::make_shared<Enemy>(enemy));
@@ -63,11 +65,13 @@ void GameData::generateLocationGraph(node* biomeNode, std::shared_ptr<Location> 
     std::vector<std::string> neighboursWithinBiome=getRandomSelection(locs, getRandomPosInt(1, locs.size()));
     
     for (std::string neighbour : neighboursWithinBiome) {
-        currentLoc->choices.push_back(getLocationById(neighbour));
-        assignRandomEntities(currentLoc->entities, biomeNode->data["enemies"], biomeNode->data["npcs"]);
+        if (neighbour != currentLoc->id) {
+            currentLoc->choices.push_back(getLocationById(neighbour));
+            assignRandomEntities(currentLoc->entities, biomeNode->data["enemies"], biomeNode->data["npcs"]);
+        }
     }
     
-    if (biomeNode->next == nullptr)
+    if (biomeNode->next->data == nullptr)
         return;
     
     std::vector<std::string> nextLocs = biomeNode->next->data["locations"];
@@ -84,7 +88,12 @@ std::shared_ptr<Location> GameData::getStartLocation() {
 }
 
 std::shared_ptr<Location> GameData::getLocationById(const std::string id) {
-    return availableLocations[id];
+    if (availableLocations[id] != nullptr)
+        return availableLocations[id];
+    else {
+        std::cout << "no location found for id: " << id;
+        throw;
+    }
 }
 
 int GameData::loadLocations(const std::string& path) {
@@ -99,7 +108,7 @@ int GameData::loadLocations(const std::string& path) {
 
     nlohmann::json locationsJson = nlohmann::json::parse(file);
     
-    for (int i=0 ; i<locationsJson["locations"].size()-1 ; i++) {
+    for (int i=0 ; i<locationsJson["locations"].size() ; i++) {
         workingLocation.id = locationsJson["locations"][i]["name"];
         workingLocation.description = locationsJson["locations"][i]["description"];
         workingLocation.text = locationsJson["locations"][i]["text"];
@@ -140,15 +149,15 @@ void GameData::loadBiomes(std::string path) {
     nlohmann::json biomeJson = nlohmann::json::parse(file);
 
     node* temp = nullptr;
-    node* root = nullptr;
-    for (int i=0 ; i<biomeJson["biomes"].size()-1 ; i++) {
-    
-        root = new node;
-        root->data = biomeJson["biomes"][i];
-        root->next = temp;
-        temp = root;
-    }
+    node* root = new node;
     biomeRootNode = root;
+    for (int i=0 ; i<biomeJson["biomes"].size() ; i++) {
+        root->data = biomeJson["biomes"][i];
+        temp = new node;
+        root->next = temp;
+        
+        root = temp;
+    }
 }
 
 int GameData::loadCharacters(std::string path) {
