@@ -54,3 +54,7 @@ int Player::attack() {
 void Player::takeDamage(int dmg) {
     health -= dmg;
 }
+
+bool Player::isDead() {
+    return health < 1;
+}

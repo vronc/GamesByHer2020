@@ -26,4 +26,5 @@ private:
     bool isRunning = true;
     void handleInventoryInput();
     void handleEntityInteraction();
+    void gameOver();
 };

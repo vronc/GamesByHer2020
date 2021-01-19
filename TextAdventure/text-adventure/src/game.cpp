@@ -33,23 +33,27 @@ void Game::handleInventoryInput() {
 }
 
 void Game::handleEntityInteraction() {
-    std::cout << "\nChoose someone/something to approach:\n\n";
-    for (int i = 0; i < player.currentLocation->entities.size(); ++i) {
-        std::cout << "[" << i+1 << "]   " << player.currentLocation->entities[i]->id << "\n";
-    }
-    std::cout << "\n\n [e]    Exit\n";
-    std::string choice = "";
-    while (true) {
-        std::cin >> choice;
-        if (choice == "e" || choice == "E") { return; }
-        
-        else if (isPositiveIntInput(choice) || std::stoi(choice) > player.currentLocation->entities.size()) {
-            std::cout << "\nYour choice isn't valid, try again!\n";
-        } else {
-            break;
+    if (player.currentLocation->entities.size() > 0) {
+        std::cout << "\nChoose someone/something to approach:\n\n";
+        for (int i = 0; i < player.currentLocation->entities.size(); ++i) {
+            std::cout << "[" << i+1 << "]   " << player.currentLocation->entities[i]->id << "\n";
         }
+        std::cout << "\n\n [e]    Exit\n";
+        std::string choice = "";
+        while (true) {
+            std::cin >> choice;
+            if (choice == "e" || choice == "E") { return; }
+            
+            else if (isPositiveIntInput(choice) || std::stoi(choice) > player.currentLocation->entities.size()) {
+                std::cout << "\nYour choice isn't valid, try again!\n";
+            } else {
+                break;
+            }
+        }
+        player.currentLocation->entities[std::stoi(choice)-1]->interact();
+    } else {
+        std::cout << "\nthis place seems to be empty...\n";
     }
-    player.currentLocation->entities[std::stoi(choice)-1]->interact();
 }
 
 void Game::run() {
@@ -78,9 +82,9 @@ void Game::run() {
         //std::cout << "~" << player.currentLocation->id << "~\n\n";
         std::cout << "\n" << player.currentLocation->text << "\n";
         
-        if (player.currentLocation->choices.size()==0){
-            std::cout << "\ngame over\n";
-            break;
+        if (player.currentLocation->choices.size()==0) {
+            std::cout << "You've reached a point of no return!";
+            gameOver();
         }
     
         std::cout << "\nChoose where you" << player.character << " want to go: ";
@@ -116,8 +120,19 @@ void Game::run() {
 
 void Game::enterCombatMode(Enemy* enemy) {
     std::cout << enemy->id << " attacks!\n";
-    while (!enemy->isDead()) {
+    while (!enemy->isDead() && !player.isDead()) {
         enemy->takeDamage(player.attack());
         player.takeDamage(enemy->getNextAttackDmg());
     }
+    if (enemy->isDead())
+        std::cout << "\n" << enemy->id << " was defeated!\n";
+    else if (player.isDead()){
+        std::cout << "\nYou died...\n";
+        gameOver();
+    }
+}
+
+void Game::gameOver() {
+    std::cout << "\ngame over!\n";
+    std::exit(EXIT_SUCCESS);
 }

@@ -25,7 +25,7 @@ class Player {
 public:
     std::shared_ptr<Location> currentLocation = nullptr;
     int moves = 0;
-    int health = 100;
+    int health = 1;
     std::string character;
     
     void addItem(const int id, int amount);
@@ -33,6 +33,7 @@ public:
     void printInventory();
     int attack();
     void takeDamage(int dmg);
+    bool isDead();
     
     std::vector<InventoryItem> inventory;
 };
