@@ -59,16 +59,28 @@ void GameData::createLocations() {
 }
 void GameData::generateLocationGraph(node* biomeNode, std::shared_ptr<Location> currentLoc) {
     std::vector<std::string> locs = biomeNode->data["locations"];
-    std::vector<std::string> neighboursWithinBiome=getRandomSelection(locs, getRandomPosInt(1, locs.size()));
+    
+    std::vector<std::string> neighboursWithinBiome;
     
     // All locations should be available within the Village.
     if (currentLoc == startLocation) {
         neighboursWithinBiome=locs;
+    } else {
+    int numNeighboursWithinBiome = getRandomPosInt(1, locs.size());
+        for (int i=0 ; i<numNeighboursWithinBiome ; i++) {
+            int randInd = getRandomPosInt(1, locs.size());
+            if (locs[i] != "") {
+                neighboursWithinBiome.push_back(locs[i]);
+                biomeNode->data["locations"][i] = "";
+            }
+        }
     }
     
-    for (std::string neighbour : neighboursWithinBiome) {
-        if (neighbour != currentLoc->id || getLocationById(neighbour)) {
-            currentLoc->choices.push_back(getLocationById(neighbour));
+    for (std::string neighbourId : neighboursWithinBiome) {
+        std::shared_ptr<Location> neighbour = getLocationById(neighbourId);
+        if (neighbour != currentLoc) {
+            currentLoc->choices.push_back(neighbour);
+            neighbour->choices.push_back(currentLoc);
             assignRandomEntities(currentLoc->entities, biomeNode->data["enemies"], biomeNode->data["npcs"]);
         }
     }
@@ -80,8 +92,10 @@ void GameData::generateLocationGraph(node* biomeNode, std::shared_ptr<Location> 
     std::vector<std::string> neighboursInNextBiome=getRandomSelection(nextLocs, getRandomPosInt(1, 2));
     
     for (std::string neighbour : neighboursInNextBiome) {
-        currentLoc->choices.push_back(getLocationById(neighbour));
-        generateLocationGraph(biomeNode->next, getLocationById(neighbour));
+        if (neighbour != "") {
+            currentLoc->choices.push_back(getLocationById(neighbour));
+            generateLocationGraph(biomeNode->next, getLocationById(neighbour));
+        }
     }
 }
 
@@ -129,7 +143,7 @@ int GameData::loadLocations(const std::string& path) {
 BaseItem* GameData::initializeItemFromName(std::string name) {
 
     if (name == "Teleport Scroll"){
-        return new TeleportScroll((int)items.size(), "location01");
+        return new TeleportScroll((int)items.size(), "The Town Square");
     } else
         return nullptr;
 }
