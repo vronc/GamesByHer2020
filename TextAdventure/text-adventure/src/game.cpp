@@ -76,7 +76,7 @@ void Game::run() {
             break;
         }
         //std::cout << "~" << player.currentLocation->id << "~\n\n";
-        std::cout << "\n" << player.currentLocation->text;
+        std::cout << "\n" << player.currentLocation->text << "\n";
         
         if (player.currentLocation->choices.size()==0){
             std::cout << "\ngame over\n";
@@ -87,7 +87,7 @@ void Game::run() {
         for(int i=0 ; i<player.currentLocation->choices.size() ; i++) {
             std::cout << "\n" << i+1 << ": " << player.currentLocation->choices[i]->description;
         }
-        std::cout << "\n" << "[i] Show Inventory";
+        std::cout << "\n\n" << "[i] Show Inventory";
         std::cout << "\n" << "[t] Interact with your surroundings" << "\n";
         
         choice = (int)player.currentLocation->choices.size()+1;
@@ -99,7 +99,7 @@ void Game::run() {
                 handleInventoryInput();
                 break;
             }
-            else if (choice == "t" || choice == "T") {
+            else if (choice == "t" || choice == "T") {
                 handleEntityInteraction();
                 break;
             }

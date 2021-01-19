@@ -18,10 +18,8 @@ void GameData::assignRandomEntities(std::vector<std::shared_ptr<Entity>> &entiti
             std::vector<Attack> attacks;
             Enemy enemy(enemyId, attacks);
             Attack attack;
-            attack.avgDmg=0;
             for (nlohmann::json attackData : availableEnemies[enemyId]["attacks"]){
                 attack.name = attackData["name"];
-                std::cout << attackData["avg_dmg"];
                 attack.avgDmg = attackData.at("avg_dmg").get<int>();
                 enemy.attacks.push_back(attack);
             }
@@ -56,7 +54,6 @@ GameData::GameData() {
 
 void GameData::createLocations() {
     loadLocations("text-adventure/content/locations.json");
-    std::cout << biomeRootNode->data["locations"][0];
     startLocation = getLocationById(biomeRootNode->data["locations"][0]);
     generateLocationGraph(biomeRootNode, startLocation);
 }
@@ -64,8 +61,13 @@ void GameData::generateLocationGraph(node* biomeNode, std::shared_ptr<Location> 
     std::vector<std::string> locs = biomeNode->data["locations"];
     std::vector<std::string> neighboursWithinBiome=getRandomSelection(locs, getRandomPosInt(1, locs.size()));
     
+    // All locations should be available within the Village.
+    if (currentLoc == startLocation) {
+        neighboursWithinBiome=locs;
+    }
+    
     for (std::string neighbour : neighboursWithinBiome) {
-        if (neighbour != currentLoc->id) {
+        if (neighbour != currentLoc->id || getLocationById(neighbour)) {
             currentLoc->choices.push_back(getLocationById(neighbour));
             assignRandomEntities(currentLoc->entities, biomeNode->data["enemies"], biomeNode->data["npcs"]);
         }
@@ -135,13 +137,11 @@ BaseItem* GameData::initializeItemFromName(std::string name) {
 void GameData::loadNpcs(std::string path) {
     std::ifstream file(path);
     availableNpcs = nlohmann::json::parse(file);
-    //std::cout << enemies["🦇"]["attacks"][0]["name"];
 }
 
 void GameData::loadEnemies(std::string path) {
     std::ifstream file(path);
     availableEnemies = nlohmann::json::parse(file);
-    //std::cout << enemies["🦇"]["attacks"][0]["name"];
 }
 
 void GameData::loadBiomes(std::string path) {

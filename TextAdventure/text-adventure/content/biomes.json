@@ -11,6 +11,12 @@
             "enemies":["🐍","🐗","🦅","🐺"],
             "npcs":["🧝🏼"],
             "locations":["The fields", "The meadow"]
+        },
+        {
+            "name":"Lakes",
+            "enemies":["🐍","🐊","🧜‍♂️"],
+            "npcs":["🦑","🧜‍♂️","🧜‍♂️"],
+            "locations":["The lake", "The swamp"]
         }
     ]
 }

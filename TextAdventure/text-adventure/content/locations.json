@@ -4,6 +4,8 @@
     { "name": "The Inn", "description": "desc the inn", "text": "text inn" },
      { "name": "The Shop", "description": "desc the shop", "text": "text shop" },
     { "name": "The fields", "description": "desc fields", "text": "text fields" },
-    { "name": "The meadow", "description": "desc meadow", "text": "text meadow" }
+    { "name": "The meadow", "description": "desc meadow", "text": "text meadow" },
+    { "name": "The lake", "description": "desc the lake", "text": "text lake" },
+    { "name": "The swamp", "description": "desc swamp", "text": "text swamp" }
   ]
 }

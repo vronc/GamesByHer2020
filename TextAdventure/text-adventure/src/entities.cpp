@@ -36,8 +36,8 @@ void Enemy::interact() {
 
 int Enemy::getNextAttackDmg() {
     Attack attack = attacks[getRandomPosInt(0, attacks.size()-1)];
-    int dmg = attack.avgDmg-3+getRandomPosInt(0,6);
-    std::cout << id << " used " << attack.name << "inflicting " << dmg << " damage points\n\n";
+    int dmg = std::max(1, attack.avgDmg-3+getRandomPosInt(0,6));
+    std::cout << id << " used " << attack.name << ", inflicting " << dmg << " damage points\n\n";
     return dmg;
 }
 

@@ -1,4 +1,19 @@
 {
-  "🧜‍♀️": { "dialogues": ["Hello!"] },
-  "🧝🏼": { "dialogues": ["Hello!"] }
+  "🧜‍♂️": { "dialogues": ["Hello!"] },
+  "🧜‍♂️": { "dialogues": ["Hello!"] },
+  "🧝🏼": { "dialogues": ["Hello!"] },
+  "🧜‍♂️": { "dialogues": ["Hello!"] },
+  "🧚‍♂️": { "dialogues": ["Hello!"] },
+  "🧙": { "dialogues": ["Hello!"] },
+  "🧙‍♂️": { "dialogues": ["Hello!"] },
+  "🧝‍♀️": { "dialogues": ["Hello!"] },
+  "🧞‍♂️": { "dialogues": ["Hello!"] },
+  "👩‍🎨": { "dialogues": ["Hello!"] },
+  "👩🏿‍🍳": { "dialogues": ["Hello!"] },
+  "👩🏻‍🌾": { "dialogues": ["Hello!"] },
+  "👨🏼‍🌾": { "dialogues": ["Hello!"] },
+  "👸🏿": { "dialogues": ["Hello!"] },
+  "🤹🏾‍♂️": { "dialogues": ["Hello!"] },
+  "🦄": { "dialogues": ["Hello!"] },
+  "🦑": { "dialogues": ["Hello!"] }
 }
